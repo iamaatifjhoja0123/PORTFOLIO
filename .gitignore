@@ -1,0 +1,16 @@
+# Node
+node_modules/
+dist/
+
+# Env & Secrets
+.env
+terraform/terraform.tfvars
+
+# Terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/.terraform.lock.hcl
+
+# OS Files
+.DS_Store

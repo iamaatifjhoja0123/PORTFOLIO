@@ -1,0 +1,36 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Base Body Styles */
+body {
+  background-color: #030712; /* Tailwind gray-950 */
+  color: #f3f4f6; /* Tailwind gray-100 */
+  overflow-x: hidden; /* Horizontal scroll ko block karne ke liye */
+}
+
+/* =========================================
+   Premium Custom Scrollbar (Dark Theme)
+   ========================================= */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #030712; /* Track ka color background jaisa */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f2937; /* Thumb ka color thoda light gray */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6; /* Hover karne par neon blue glow */
+}

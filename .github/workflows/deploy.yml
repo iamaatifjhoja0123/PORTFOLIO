@@ -1,0 +1,38 @@
+name: Deploy Portfolio to AWS Serverless
+
+on:
+  push:
+    branches:
+      - main # Jab bhi main branch par push hoga, yeh pipeline chalegi
+
+jobs:
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Frontend Dependencies
+        working-directory: ./frontend
+        run: npm install
+
+      - name: Build Frontend (React/Vite)
+        working-directory: ./frontend
+        run: npm run build
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      - name: Deploy to AWS S3 Bucket
+        working-directory: ./frontend
+        # Yeh command purani files delete karke nayi build S3 mein daal degi
+        run: aws s3 sync dist/ s3://aatif-portfolio-frontend-bucket --delete
