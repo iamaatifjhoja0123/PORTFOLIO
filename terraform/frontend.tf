@@ -1,11 +1,10 @@
-# terraform/frontend.tf
 
 # 1. S3 Bucket for React Frontend
 resource "aws_s3_bucket" "frontend_bucket" {
   bucket = var.bucket_name
 }
 
-# Bucket ko public access se block karna (Security Best Practice)
+# Bucket ko public access se block karna (Security Best Practice) h,
 resource "aws_s3_bucket_public_access_block" "frontend_bucket_pab" {
   bucket = aws_s3_bucket.frontend_bucket.id
 
@@ -28,7 +27,7 @@ resource "aws_cloudfront_origin_access_control" "default" {
 resource "aws_cloudfront_distribution" "frontend_cdn" {
   enabled             = true
   is_ipv6_enabled     = true
-  aliases             = [var.domain_name] # <--- Custom Domain yahan add kiya gaya hai
+  aliases             = [var.domain_name] # <--- Custom Domain  add kiya hai
   default_root_object = "index.html"
 
   origin {
@@ -114,9 +113,8 @@ output "cloudfront_url" {
   description = "Aapki website ka AWS CloudFront URL"
 }
 
-# ==========================================
+
 # CUSTOM DOMAIN & SSL CERTIFICATE (ACM)
-# ==========================================
 
 # 1. Request SSL Certificate in us-east-1
 resource "aws_acm_certificate" "cert" {

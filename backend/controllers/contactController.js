@@ -21,7 +21,7 @@ const sendContactEmail = async (req, res) => {
         // Email ka format kaisa hoga
         const mailOptions = {
             from: email,
-            to: process.env.EMAIL_USER, // Yeh mail aapko aayega
+            to: process.env.EMAIL_USER, // Yeh mail aayega
             subject: `New Portfolio Message from ${name}`,
             text: `You have a new message from your portfolio website!\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`
         };

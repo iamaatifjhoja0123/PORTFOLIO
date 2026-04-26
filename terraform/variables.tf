@@ -9,7 +9,7 @@ variable "domain_name" {
 variable "bucket_name" {
   description = "Frontend host karne ke liye S3 bucket ka naam"
   type        = string
-  default     = "aatif-portfolio-frontend-bucket" # Yeh naam globally unique hona chahiye
+  default     = "aatif-portfolio-frontend-bucket" 
 }
 
 variable "email_user" {

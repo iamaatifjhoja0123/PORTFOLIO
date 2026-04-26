@@ -1,7 +1,7 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
-const serverless = require('serverless-http'); // <-- Yeh package naya add kiya hai
+const serverless = require('serverless-http'); 
 require('dotenv').config();
 
 const app = express();
@@ -9,7 +9,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: '*', // Abhi ke liye sab allow kar dete hain taaki AWS se testing aasan ho. Production mein ise 'https://aatif.jhoja.tech' kar dijiyega.
+    origin: '*', // Abhi ke liye sab allow kar diya taaki AWS se testing aasan ho.
     methods: ['POST']
 }));
 
@@ -31,10 +31,10 @@ app.post('/api/contact', async (req, res) => {
     }
 
     try {
-        // Email jo aapko aayega
+        // Email jo aayega
         const mailOptions = {
             from: process.env.EMAIL_USER,
-            to: process.env.EMAIL_USER, // Aap khud ko hi mail bhej rahe hain
+            to: process.env.EMAIL_USER, // khud ko hi mail bhej raha h
             replyTo: email, // Jisse reply karne par direct user ko mail jaye
             subject: `Portfolio Contact from ${name}`,
             text: `You have a new message from your portfolio!\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
@@ -48,9 +48,5 @@ app.post('/api/contact', async (req, res) => {
     }
 });
 
-// ==========================================
 // AWS LAMBDA SERVERLESS EXPORT
-// ==========================================
-// Localhost wala app.listen() hata diya gaya hai.
-// Ab hum app ko Lambda handler ke roop mein export kar rahe hain.
 module.exports.handler = serverless(app);

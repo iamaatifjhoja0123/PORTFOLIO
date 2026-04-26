@@ -3,11 +3,11 @@
 # 1. Backend folder ko ZIP karna (Lambda ke liye)
 data "archive_file" "backend_zip" {
   type        = "zip"
-  source_dir  = "${path.module}/../backend" # Aapke backend folder ka path
+  source_dir  = "${path.module}/../backend" # backend folder ka path
   output_path = "${path.module}/backend.zip"
 }
 
-# 2. IAM Role (Lambda ko execute hone ki permission dena)
+# 2. IAM Role (Lambda ko execute hone ki permission)
 resource "aws_iam_role" "lambda_exec_role" {
   name = "portfolio_lambda_exec_role"
 
@@ -54,13 +54,13 @@ resource "aws_apigatewayv2_api" "http_api" {
   
   # CORS setup taaki CloudFront frontend isko call kar sake
   cors_configuration {
-    allow_origins = ["*"] # Security ke liye isey baad mein "https://d25l972l1rqn75.cloudfront.net" kar sakte hain
+    allow_origins = ["*"] 
     allow_methods = ["POST", "GET", "OPTIONS"]
     allow_headers = ["content-type"]
   }
 }
 
-# API Gateway ko Lambda se connect karna
+# API Gateway ko Lambda se connect 
 resource "aws_apigatewayv2_integration" "lambda_integration" {
   api_id             = aws_apigatewayv2_api.http_api.id
   integration_type   = "AWS_PROXY"

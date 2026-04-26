@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Cloud, GitMerge, ShieldCheck, Code } from 'lucide-react';
 
 const About = () => {
-  // Naye aur updated skill categories (Cloud & DevOps Focus)
+  //  skill categories 
   const skillCategories = [
     {
       title: "Cloud & Infrastructure",

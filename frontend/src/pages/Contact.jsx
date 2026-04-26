@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Mail, Send, MessageCircle } from 'lucide-react';
 
 const Contact = () => {
-  // Form ka data aur loading state handle karne ke liye
+  // Form ka data aur loading state handle ke liye
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,7 +32,7 @@ const Contact = () => {
 
       if (response.ok) {
         alert("Message sent successfully! I'll get back to you soon.");
-        setFormData({ name: '', email: '', message: '' }); // Message jane ke baad form clear kar do
+        setFormData({ name: '', email: '', message: '' }); // Message jane ke baad form clear 
       } else {
         alert("Failed to send message. Please try again.");
       }
@@ -40,11 +40,11 @@ const Contact = () => {
       console.error("Error submitting form:", error);
       alert("Something went wrong. Please check your connection or ensure the backend server is running.");
     } finally {
-      setIsSubmitting(false); // Loading state band kar do
+      setIsSubmitting(false); // Loading state band 
     }
   };
 
-  // Aapka WhatsApp Number aur Pre-filled Message
+  //WhatsApp Number aur Pre-filled Message
   const whatsappNumber = "917983446931";
   const whatsappMessage = "Hi Aatif, I saw your portfolio and would like to connect!";
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;

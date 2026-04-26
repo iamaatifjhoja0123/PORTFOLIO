@@ -70,7 +70,7 @@ const Navbar = () => {
               href="/resume.pdf" 
               target="_blank" 
               rel="noopener noreferrer"
-              onClick={handleResumeClick} // <-- Download trigger
+              onClick={handleResumeClick} // <-- Download trigger hoga
               className="px-5 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold shadow-lg shadow-blue-500/30 hover:shadow-cyan-500/50 transition-all duration-300 cursor-pointer"
             >
               Resume

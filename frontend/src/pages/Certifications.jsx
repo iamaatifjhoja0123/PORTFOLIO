@@ -52,7 +52,7 @@ const Certifications = () => {
               </div>
             </div>
 
-            {/* Right Side: Credential Details */}
+            {/* Right Side: Credential Details h */}
             <div className="space-y-8">
               <h4 className="text-xl font-semibold text-white border-b border-gray-800 pb-2">Credential Details</h4>
               
