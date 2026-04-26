@@ -28,6 +28,7 @@ resource "aws_cloudfront_origin_access_control" "default" {
 resource "aws_cloudfront_distribution" "frontend_cdn" {
   enabled             = true
   is_ipv6_enabled     = true
+  aliases             = [var.domain_name] # <--- Custom Domain yahan add kiya gaya hai
   default_root_object = "index.html"
 
   origin {
@@ -75,11 +76,12 @@ resource "aws_cloudfront_distribution" "frontend_cdn" {
     }
   }
 
+  # <--- Naya Viewer Certificate Block (SSL ke liye) --->
   viewer_certificate {
-    cloudfront_default_certificate = true 
-    # Note: Abhi hum default certificate use kar rahe hain. 
-    # Jab hum Route53 link karenge tab custom certificate lagayenge.
-  }
+  acm_certificate_arn      = aws_acm_certificate.cert.arn
+  ssl_support_method       = "sni-only"
+  minimum_protocol_version = "TLSv1.2_2021"
+}
 }
 
 # 4. S3 Bucket Policy (CloudFront ko read karne ki permission)
@@ -108,6 +110,32 @@ resource "aws_s3_bucket_policy" "frontend_bucket_policy" {
 
 # 5. Output mein CloudFront ka URL print karwana
 output "cloudfront_url" {
-  value = aws_cloudfront_distribution.frontend_cdn.domain_name
+  value       = aws_cloudfront_distribution.frontend_cdn.domain_name
   description = "Aapki website ka AWS CloudFront URL"
+}
+
+# ==========================================
+# CUSTOM DOMAIN & SSL CERTIFICATE (ACM)
+# ==========================================
+
+# 1. Request SSL Certificate in us-east-1
+resource "aws_acm_certificate" "cert" {
+  provider          = aws.us_east_1
+  domain_name       = var.domain_name
+  validation_method = "DNS"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+# 2. Output for DNS Validation
+output "ssl_validation_name" {
+  value       = tolist(aws_acm_certificate.cert.domain_validation_options)[0].resource_record_name
+  description = "Add this NAME as a CNAME in your Domain DNS"
+}
+
+output "ssl_validation_value" {
+  value       = tolist(aws_acm_certificate.cert.domain_validation_options)[0].resource_record_value
+  description = "Add this VALUE in your Domain DNS"
 }
