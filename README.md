@@ -10,6 +10,8 @@ Welcome to the source code of my personal portfolio website, hosted live at **[a
 
 This project is not just a standard web application; it is a demonstration of **Cloud-Native Architecture, Infrastructure as Code (IaC), and Zero-Downtime CI/CD pipelines**. It showcases my ability to architect and deploy highly available, secure, and cost-optimized full-stack solutions.
 
+![Top10News Architecture Diagram](diagram.png)
+
 ---
 
 ## 🏗️ Cloud Architecture
