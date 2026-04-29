@@ -34,7 +34,7 @@ resource "aws_lambda_function" "portfolio_backend" {
   function_name    = "portfolio-contact-api"
   role             = aws_iam_role.lambda_exec_role.arn
   handler          = "server.handler" # server.js file ke andar handler function
-  runtime          = "nodejs20.x"     # Latest Node.js version
+  runtime          = "nodejs22.x"     
   filename         = data.archive_file.backend_zip.output_path
   source_code_hash = data.archive_file.backend_zip.output_base64sha256
   timeout          = 10 # Email send hone mein thoda time lagta hai
